@@ -1,0 +1,47 @@
+{
+  "name": "uibuilder-vuejs-component-extras-lamp",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "cd examples && yarn serve",
+    "build:debug": "cross-env NODE_ENV=debug webpack --config webpack.config.js",
+    "build:release": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "build": "npm run build:debug && npm run build:release"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "main": "lamp.js",
+  "engines": {
+    "node": ">=8.16"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "maintained node versions",
+    "last 2 versions",
+    "not dead",
+    "not ie < 11"
+  ],
+  "keywords": [
+    "uibuilder",
+    "vuejs",
+    "vue",
+    "components",
+    "front-end",
+    "lamp",
+    "home automation"
+  ],
+  "description": "Lamp component for node-red-contrib-uibuilder with VueJS. Should also work with other VueJS installations.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TotallyInformation/uibuilder-vuejs-component-extras.git"
+  },
+  "author": "Julian Knight (https://it.knightnet.org.uk)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/TotallyInformation/uibuilder-vuejs-component-extras/issues"
+  },
+  "homepage": "https://github.com/TotallyInformation/uibuilder-vuejs-component-extras#readme"
+}

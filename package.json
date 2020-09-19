@@ -1,0 +1,39 @@
+{
+  "name": "uibuilder-vuejs-component-extras",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "vue-svg-gauge": "^1.2.1"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": ">=8.16"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "maintained node versions",
+    "last 2 versions",
+    "not dead",
+    "not ie < 11"
+  ],
+  "keywords": [
+    "uibuilder",
+    "vuejs",
+    "vue",
+    "components",
+    "front-end"
+  ],
+  "description": "A set of extra VueJS components designed to work with node-red-contrib-uibuilder though they should also work with other VueJS installations.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TotallyInformation/uibuilder-vuejs-component-extras.git"
+  },
+  "author": "Julian Knight (https://it.knightnet.org.uk)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/TotallyInformation/uibuilder-vuejs-component-extras/issues"
+  },
+  "homepage": "https://github.com/TotallyInformation/uibuilder-vuejs-component-extras#readme"
+}

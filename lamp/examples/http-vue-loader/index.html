@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Node-RED UI Builder</title>
+    <meta name="description" content="Node-RED UI Builder - VueJS + bootstrap-vue version">
+
+    <link rel="icon" href="./images/node-blue.ico">
+
+    <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap/dist/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.css" />
+    
+    <link rel="stylesheet" href="./index.css" media="all">
+</head><body>
+
+    <div id="app" v-cloak>
+
+        <b-container id="app_container">
+
+            <h2>My House, Ground Floor</h2>
+            <div id="floorplan" style="position:relative; width:100%; height:50em; background:url(./serveimage.svg);">
+                <lamp id="a" :color="isona ? 'red' : 'grey'" :glow="isona" :clickable="false" x="100" y="100" @bulbclicked="myClick" title="A: This one does not respond to clicks"><desc>Here we use a component slot to insert some more custom svg</desc></lamp>
+                <lamp id="b" :color="isonb ? 'red' : 'grey'" :glow="isonb" :clickable="true"  x="270" y="120" @bulbclicked="myClick" title="B"><circle cx="50" cy="50" r="50"/></lamp>
+                <lamp id="c" :ison="isonc" :clickable="true"  x="650" y="120" @bulbclicked="myClick" title="C"></lamp>
+                <lamp id="d" :ison="isond" :clickable="true"  x="250" y="270" @bulbclicked="myClick" :title="'D: ' + (isond ? 'ON' : 'off')"></lamp>
+            </div>
+        
+
+            <h2>Dynamic Data</h2>
+            <b-card class="mt-3" header="Normal Messages" border-variant="primary" header-bg-variant="primary" header-text-variant="white" align="left" >
+                <pre v-html="hLastRcvd" class="syntax-highlight"></pre>
+            </b-card>
+
+        </b-container>
+
+    </div>
+
+    <script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
+    <script src="../uibuilder/vendor/vue/dist/vue.js"></script> <!-- dev version with component compiler -->
+    <script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
+    <script src="../uibuilder/vendor/http-vue-loader/src/httpVueLoader.js"></script>
+    <script src="./uibuilderfe.min.js"></script> <!--    //prod version -->
+    <script src="./index.js"></script>
+
+</body>
+
+</html>
