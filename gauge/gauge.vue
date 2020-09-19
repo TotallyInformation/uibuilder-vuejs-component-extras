@@ -1,27 +1,60 @@
 <template>
     <div>
         <p>Gauge</p>
-        <VueSvgGauge
-            :start-angle="-110"
-            :end-angle="110"
-            :value="3"
-            :separator-step="1"
-            :min="0"
-            :max="4"
-            :gauge-color="[{ offset: 0, color: '#347AB0'}, { offset: 100, color: '#8CDFAD'}]"
-            :scale-interval="0.1"
+        <vue-svg-gauge
+            :start-angle="startAngle"
+            :end-angle="endAngle"
+            :value="value"
+            :separator-step="separatorStep"
+            :min="min"
+            :max="max"
+            :gauge-color="gaugeColor"
+            :scale-interval="scaleInterval"
         />
     </div>
 </template>
 
-<script>
-//import { VueSvgGauge } from 'vue-svg-gauge'
+<script src="../uibuilder/vendor/uibuilder-vuejs-component-extras/node_modules/vue-svg-gauge/dist/vue-svg-gauge.min.js"></script>
+<!-- <script src="https://unpkg.com/vue-svg-gauge@latest/dist/vue-svg-gauge.min.js"></script> -->
 
-export default {
-  name: 'gauge',
-  components: {
-    //VueSvgGauge,
-    'VueSvgGauge': httpVueLoader('../uibuilder/vendor/uibuilder-vuejs-component-extras/gauge/gauge.vue'),
-  }
-}
+<script>
+    /** Use vue-svg-gauge component module
+     * @see https://github.com/hellocomet/vue-svg-gauge
+     * @see https://github.com/TotallyInformation/node-red-contrib-uibuilder/wiki/Integrating-vue-svg-gauge
+     */
+
+    //import { VueSvgGauge } from 'vue-svg-gauge'
+
+    module.exports = {
+        //export default {
+        name: 'gauge',
+
+        /** Note that props with dashes in name have to be referenced as camel case in JS */
+        props: [
+            'start-angle',
+            'end-angle',
+            'value',
+            'separator-step',
+            'min',
+            'max',
+            'gauge-color',
+            'scale-interval',
+        ], // -- End of props -- //
+
+        data: function() { return {
+        }}, // -- End of data -- //
+
+        computed: {
+        }, // -- End of computed -- //
+
+        methods: {
+        }, // -- End of methods -- //
+
+        //   components: {
+        //     //VueSvgGauge,
+        //     'VueSvgGauge': httpVueLoader('../uibuilder/vendor/uibuilder-vuejs-component-extras/node_modules/vue-svg-gauge/dist/vue-svg-gauge.min.js'),
+        //   }
+    }
 </script>
+
+<style></style>
