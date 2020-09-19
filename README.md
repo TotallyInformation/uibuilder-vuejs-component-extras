@@ -4,6 +4,8 @@ A set of extra VueJS components designed to work with node-red-contrib-uibuilder
 **WARNING**: Currently pre-alpha and highly experimental. Don't assume that anything works right now. Also the installation instructions won't yet work.
 Right now, the only way to use this is to install it manually.
 
+Also note that ES8/ECMA2017 JavaScript is assumed. Requires Node.js v10, no IE11, modern browser.
+
 ## Components
 
 This package contains a number of VueJS components:
