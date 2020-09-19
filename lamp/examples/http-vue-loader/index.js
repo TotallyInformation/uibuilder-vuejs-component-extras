@@ -1,5 +1,5 @@
 /* jshint browser: true, esversion: 5, asi: true */
-/*globals Vue, uibuilder */
+/*globals Vue, uibuilder, httpVueLoader */
 // @ts-nocheck
 /*
   Copyright (c) 2019 Julian Knight (Totally Information)
