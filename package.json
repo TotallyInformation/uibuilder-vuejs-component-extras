@@ -9,14 +9,14 @@
   },
   "main": "index.js",
   "engines": {
-    "node": ">=8.16"
+    "node": ">=10"
   },
   "browserslist": [
     "> 0.5%",
     "maintained node versions",
     "last 2 versions",
     "not dead",
-    "not ie < 11"
+    "not ie"
   ],
   "keywords": [
     "uibuilder",
@@ -35,5 +35,11 @@
   "bugs": {
     "url": "https://github.com/TotallyInformation/uibuilder-vuejs-component-extras/issues"
   },
-  "homepage": "https://github.com/TotallyInformation/uibuilder-vuejs-component-extras#readme"
+  "homepage": "https://github.com/TotallyInformation/uibuilder-vuejs-component-extras#readme",
+  "devDependencies": {
+    "@types/node": "^14.11.1",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.9.0",
+    "eslint-plugin-vue": "^6.2.2"
+  }
 }
