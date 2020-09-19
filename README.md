@@ -8,7 +8,7 @@ Right now, the only way to use this is to install it manually.
 
 This package contains a number of VueJS components:
 
-* [&lt;<lamp>](./lamp/README.md)
+* [&lt;lamp>](./lamp/README.md)
   
   A small SVG lamp icon designed for home-automation use. Overlay on a floorplan background to show what lamps are available and whether they are on or off.
 
