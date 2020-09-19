@@ -8,12 +8,12 @@ Right now, the only way to use this is to install it manually.
 
 This package contains a number of VueJS components:
 
-* [<lamp>](./lamp/README.md)
+* [&lt;<lamp>](./lamp/README.md)
   
   A small SVG lamp icon designed for home-automation use. Overlay on a floorplan background to show what lamps are available and whether they are on or off.
 
   
-* [<gauge>](./gauge/README.md)
+* [&lt;gauge>](./gauge/README.md)
   
   An SVG gauge chart using [vue-svg-gauge](https://github.com/hellocomet/vue-svg-gauge)
 
