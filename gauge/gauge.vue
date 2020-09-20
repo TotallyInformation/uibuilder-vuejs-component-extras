@@ -35,6 +35,28 @@
         /** Note that props with dashes in name have to be referenced as camel case in JS */
         props: {
             'value': Number,
+            /** Use to pass any of vue-svg-gauge properties
+             * @param {gaugeOptions} config
+             * 
+             * @param {String} [config.title] If present, a para is added above the chart. Default: 'uibuilder Gauge',
+             * @param {String} [config.toolTip] If present, adds a title tooltip to the outer element. Default: undefined,
+             * @param {String} [config.figure] If present, a para is added below the chart. Default: undefined,
+             * @param {String} [config.clickEvents] If true, sends data back to uibuilder if clicked. Default: false,
+             * 
+             * @param {Number} [config.value] Gauge value. Optional, use main value prop normally. Default: 0
+             * @param {Number} [config.min] Default: 0,
+             * @param {Number} [config.max] Default: 100,
+             * @param {Number} [config.startAngle] Default: -90,
+             * @param {Number} [config.endAngle] Default: 90,
+             * @param {Number} [config.innerRadius] Default: 60,
+             * @param {Number} [config.separatorStep] Default: 10,
+             * @param {Number} [config.separatorThickness] Default: 4,
+             * @param {Array} [config.gaugeColor] Default: [{ offset: 0, color: '#347AB0' }, { offset: 100, color: '#8CDFAD' }],
+             * @param {String} [config.baseColor] Default: '#DDDDDD',
+             * @param {Number} [config.scaleInterval] Default: 5,
+             * @param {Number} [config.transitionDuration] Default: 1500,
+             * @param {String} [config.easing] Default: 'Circular.Out', @see https://github.com/tweenjs/tween.js/
+             */
             'config': {
                 type: Object,
                 default: function() { return {
@@ -77,14 +99,18 @@
             //     console.log('evtHandler', e)
             // },
             clickOuterDiv: function(e){
+                // Only respond to clicks if needed
                 if ( this.config.clickEvents !== true ) return
                 
                 console.log('clickOuterDiv - e', e)
                 console.log('clickOuterDiv - this', this)
 
+                /** If this component is being used with Node-RED/uibuilder,
+                 *  Send a msg back to Node-RED.
+                 */
                 if ( window.uibuilder ) uibuilder.send({
                     'topic': 'gauge clicked',
-                    //'payload': e,  // for some reason, just passing e only gives e.isTrusted and nothing else
+                    // For some reason, just passing e only gives e.isTrusted and nothing else
                     'payload': {
                         x: e.x, y: e.y,
                         clientX: e.clientX, clientY: e.clientY, pageX: e.pageX, pageY: e.pageY,  offsetX: e.offsetX, offsetY: e.offsetY,  layerX: e.layerX, layerY: e.layerY,  screenX: e.screenX, screenY: e.screenY, 
