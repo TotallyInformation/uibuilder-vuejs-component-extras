@@ -1,0 +1,154 @@
+[
+    {
+        "id": "8a0a2586.f20598",
+        "type": "comment",
+        "z": "18cb249f.38bafb",
+        "name": "uibuilder-vuejs-component-extras",
+        "info": "You must install the module manually (into your userDir folder) from GitHub.\n\nThen, after doing an initial redeploy of this flow\nchange the index.html and index.js files to match the examples.\n\nKick off the 2 injects, they will auto-repeat.\n\nShows data being dynamically updated in the 2\nseparate gauge component instances without you\nneeding to add lots of code yourself.\n\nNote that the custom js is experimental and will\nbe moved into the uibuilderfe library once complete.",
+        "x": 370,
+        "y": 3160,
+        "wires": []
+    },
+    {
+        "id": "11459c44.ab2614",
+        "type": "inject",
+        "z": "18cb249f.38bafb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "_uib",
+                "v": "{\t   \"componentRef\":\"gauge1\",\t   \"options\":{\t       \"startAngle\":-110,\t       \"title\":\"This is a gauge\" & $string($floor($random()*10))\t       \t   }\t}",
+                "vt": "jsonata"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "gaugeValue",
+        "payload": "$random() * 100",
+        "payloadType": "jsonata",
+        "x": 170,
+        "y": 3200,
+        "wires": [
+            [
+                "53922d3c.3bb194"
+            ]
+        ]
+    },
+    {
+        "id": "df107780.b74a08",
+        "type": "debug",
+        "z": "18cb249f.38bafb",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 3200,
+        "wires": []
+    },
+    {
+        "id": "53922d3c.3bb194",
+        "type": "uibuilder",
+        "z": "18cb249f.38bafb",
+        "name": "",
+        "topic": "",
+        "url": "extras",
+        "fwdInMessages": false,
+        "allowScripts": false,
+        "allowStyles": false,
+        "copyIndex": true,
+        "showfolder": false,
+        "useSecurity": false,
+        "sessionLength": 432000,
+        "tokenAutoExtend": false,
+        "x": 490,
+        "y": 3220,
+        "wires": [
+            [
+                "df107780.b74a08"
+            ],
+            [
+                "f4c32a2e.ce5398"
+            ]
+        ]
+    },
+    {
+        "id": "f4c32a2e.ce5398",
+        "type": "debug",
+        "z": "18cb249f.38bafb",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 3240,
+        "wires": []
+    },
+    {
+        "id": "64c73a15.88fb54",
+        "type": "inject",
+        "z": "18cb249f.38bafb",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "gauge2Value",
+        "payload": "$random() * 100",
+        "payloadType": "jsonata",
+        "x": 170,
+        "y": 3240,
+        "wires": [
+            [
+                "aa08f93c.238fb8"
+            ]
+        ]
+    },
+    {
+        "id": "aa08f93c.238fb8",
+        "type": "function",
+        "z": "18cb249f.38bafb",
+        "name": "",
+        "func": "// Generate a random colour\nconst randomHsl = () => `hsla(${Math.random() * 360}, 100%, 50%, 1)`\n//const randomHsl = () => '#'+Math.floor(Math.random()*16777215).toString(16).padStart(6, '0')\n\n\n// This is pretty artificial since you really don't need to send\n// this stuff each time - however, it shows the capabilities.\nmsg._uib = {\n   \"componentRef\":\"gauge2\",\n   \"options\":{\n       'gaugeColor': [\n           { offset: 0, color: randomHsl() }, \n           { offset: 100, color: randomHsl() },\n        ],\n       \"title\":\"Another gauge \" + randomHsl()\n       \n   }\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 265,
+        "y": 3240,
+        "wires": [
+            [
+                "53922d3c.3bb194"
+            ]
+        ],
+        "l": false
+    }
+]
