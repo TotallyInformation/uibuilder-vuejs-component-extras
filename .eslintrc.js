@@ -47,5 +47,15 @@ module.exports = {
         ],
         'comma-dangle':'off',
         'no-unused-vars': 'warn',
+        /** @see https://eslint.vuejs.org/rules/html-indent.html  */
+        'vue/html-indent': [
+            'error', 4, {
+                'attribute': 1,
+                'baseIndent': 1,
+                'closeBracket': 0,
+                'alignAttributesVertically': true,
+                'ignores': []
+            }
+        ]
     },
 }
