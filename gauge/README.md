@@ -12,6 +12,12 @@ It still works without uibuilder though.
 Currently, see the uibuilder-vuejs-component-extras readme. Eventually this component will
 end up in its own module.
 
+### Examples
+
+There are two versions of the examples. The first uses [http-vue-loader](https://github.com/FranckFreiburger/http-vue-loader)
+which must be installed via the uibuilder module installer prior to use. The second only works with modern browsers and uses
+the newer [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) specification.
+
 ## Including the component in your front-end code
 
 Currently, see the uibuilder-vuejs-component-extras readme. Eventually this component will
@@ -26,6 +32,9 @@ you can simply use the following minimal HTML to add an instance to your web pag
 <gauge ref="gauge1" />
 ```
 That will display with default settings and a value of 0 until you have sent it some data.
+
+Note that you can still use the other props as shown in the [next section](#vuejs-only-usage). These can be useful if you want to 
+have default values before the first msg is sent.
 
 To send a value to the gauge, all you need in Node-RED is to send a msg like the following to your uibuilder Node.
 
@@ -42,26 +51,29 @@ To send a value to the gauge, all you need in Node-RED is to send a msg like the
              *
              * These options are specific to this component:
              *
-             * @param {String} [config.title] If present, a para is added above the chart. Default: 'uibuilder Gauge',
-             * @param {String} [config.toolTip] If present, adds a title tooltip to the outer element. Default: undefined,
-             * @param {String} [config.figure] If present, a para is added below the chart. Default: undefined,
-             * @param {String} [config.clickEvents] If true, sends data back to uibuilder if clicked. Default: false,
+             * @param {String} [header] If present, a para is added above the chart. Default: 'uibuilder Gauge',
+             * @param {String} [toolTip] If present, adds a title tooltip to the outer element. Default: undefined,
+             * @param {String} [caption] If present, a para is added below the chart. Default: undefined,
+             * @param {String} [clickEvents] If true, sends data back to uibuilder if clicked. Default: false,
+             * @param {String} [style] CSS styles to override the gauge style. Default: "height:15rem;",
              *
              * The remaining options are properties used by the SVG Gauge component:
              * 
-             * @param {Number} [config.value] Gauge value. Optional, use main value prop normally. Default: 0
-             * @param {Number} [config.min] Default: 0,
-             * @param {Number} [config.max] Default: 100,
-             * @param {Number} [config.startAngle] Default: -90,
-             * @param {Number} [config.endAngle] Default: 90,
-             * @param {Number} [config.innerRadius] Default: 60,
-             * @param {Number} [config.separatorStep] Default: 10,
-             * @param {Number} [config.separatorThickness] Default: 4,
-             * @param {Array} [config.gaugeColor] Default: [{ offset: 0, color: '#347AB0' }, { offset: 100, color: '#8CDFAD' }],
-             * @param {String} [config.baseColor] Default: '#DDDDDD',
-             * @param {Number} [config.scaleInterval] Default: 5,
-             * @param {Number} [config.transitionDuration] Default: 1500,
-             * @param {String} [config.easing] Default: 'Circular.Out', @see https://github.com/tweenjs/tween.js/
+             * @param {Number} [value] Gauge value. Optional, use main value prop normally. Default: 0
+             * @param {Number} [min] Default: 0,
+             * @param {Number} [max] Default: 100,
+             * @param {Number} [startAngle] Default: -90,
+             * @param {Number} [endAngle] Default: 90,
+             * @param {Number} [innerRadius] Default: 60,
+             * @param {Number} [separatorStep] Default: 10,
+             * @param {Number} [separatorThickness] Default: 4,
+             * @param {Object[]} [gaugeColor] Default: [{ offset: 0, color: '#347AB0' }, { offset: 100, color: '#8CDFAD' }],
+             * @param {Number} [gaugeColor[].offset] Starting value for the colour.
+             * @param {Number} [gaugeColor[].color]  Colour to apply at starting offset. Any valid CSS colour specification.
+             * @param {String} [baseColor] Default: '#DDDDDD',
+             * @param {Number} [scaleInterval] Default: 5,
+             * @param {Number} [transitionDuration] Default: 1500,
+             * @param {String} [easing] Default: 'Circular.Out', @see https://github.com/tweenjs/tween.js/
              */
         }
     }
@@ -70,13 +82,18 @@ To send a value to the gauge, all you need in Node-RED is to send a msg like the
 
 Note the `clickEvents` flag. If this is set to `true` when using uibuilder, clicking on the gauge will send a message back to Node-RED with a payload in the following format:
 
-```json
+```javascript
 {
-    "x": 708 ,"y": 621, "clientX": 708, "clientY": 621, "pageX": 708, "pageY": 621, "offsetX": 412, "offsetY": 84, "layerX": 432, "layerY": 144, "screenX": 708, "screenY": 724,
-    "altKey": false, "ctrlKey": false, "metaKey": false, "shiftKey": false,
+    // Shows which component reference (id) was clicked
     "componentRef":"gauge1",
+    // Shows which component type (the HTML tag) was clicked
     "componentTag":"gauge",
-    "eventType":"click"
+    // Shows what event was triggered (only a click is valid for the gauge)
+    "eventType":"click",
+    // Show various positions of where the click took place
+    "x": 708 ,"y": 621, "clientX": 708, "clientY": 621, "pageX": 708, "pageY": 621, "offsetX": 412, "offsetY": 84, "layerX": 432, "layerY": 144, "screenX": 708, "screenY": 724,
+    // Shows which variation keys were held down when the click took place
+    "altKey": false, "ctrlKey": false, "metaKey": false, "shiftKey": false,
 }
 ```
 
@@ -84,10 +101,12 @@ This is all taken from the DOM event and VueJS component data.
 
 ## VueJS only usage
 
-You can also use the component without uibuilder or in a hybrid fashion (sending some data from Node-RED and coding some in your Vue app).
+You can also use the component without uibuilder or in a hybrid fashion 
+(sending some data from Node-RED and coding some in your Vue app as defaults for example).
 
 ```html
 <gauge
+    ref="anaothergauge"
     value="50"
     <!-- The "config" data here is the same as the "options" data shown above 
          except that you have to serialise it if entering it in html - better to pass it from a data object
