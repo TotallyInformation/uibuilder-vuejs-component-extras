@@ -1,3 +1,13 @@
+# SVG Gauge for Vuejs/uibuilder/Node-RED - [http-vue-loader](https://github.com/FranckFreiburger/http-vue-loader) Version
+
+This version of the example requires [http-vue-loader](https://github.com/FranckFreiburger/http-vue-loader)
+in order to dynamically load the .vue file without a build step.
+This should be installed prior to use via uibuilder's library manager. Alternatively, you can use it direct
+over the Internet from unpkg.com. See the example index.html file.
+
+See also the HTML component version for an alternate method of loading.
+
+
 # To use this example
 
 1) Install the module: `cd ~/.node-red && npm install totallyinformation/uibuilder-vuejs-component-extras`
