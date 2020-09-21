@@ -34,7 +34,7 @@ var app1 = new Vue({
 
     data: {
         // Hold a copy of the value to use in index.html if you like
-        gauge2Val: null,
+        gauge2Val: 0,
 
         //#region debug
         startMsg    : 'Vue has started, waiting for messages',
