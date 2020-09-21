@@ -29,7 +29,7 @@ That will display with default settings and a value of 0 until you have sent it 
 
 To send a value to the gauge, all you need in Node-RED is to send a msg like the following to your uibuilder Node.
 
-```json
+```javascript
 {
     "topic": "OptionalTopic",    // Optional
     "payload": 50,               // the value to be shown on the gauge
