@@ -1,7 +1,6 @@
 <!doctype html><html lang="en"><head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <meta name="viewport" content="width=device-width">
     <title>uibuilder extra components testing</title>
     <meta name="description" content="Testing uibuilder extra components">
     <link rel="icon" href="./images/node-blue.ico">
@@ -14,6 +13,11 @@
         <b-container id="app_container">
             <h1>Testing components from uibuilder-vuejs-component-extras</h1>
 
+            <p>
+                Simple example showing how to have two gauge component instances on the page
+                and be able to send data and configuration to them from Node-RED.
+            </p>
+
             <!-- A simple tabbed interface where changing tabs does not change the URL -->
             <b-card no-body>
                 <b-tabs card>
@@ -22,15 +26,15 @@
                             <!-- 2 gauges so that you can test sending data to either from Node-RED
                                  Note that you don't _need_ any of the formatting nor the additional inner text.
                                 -->
-                                
-                            <b-card class="mb-3 pb-5">
-                                <gauge ref="gauge1" style="height:15em;">Hi there</gauge>
+
+                            <b-card>
+                                <!-- The simplest possible example. Data & config is sent from Node-RED -->
+                                <gauge ref="gauge1" />
                             </b-card>
 
-                            <b-card class="mt-3 pb-5">
-                                <gauge ref="gauge2" style="height:15em;">
-                                    <!-- This slot might be removed and replaced with data sent from Node-RED?
-                                         Or possible -->
+                            <b-card class="mt-2">
+                                <!-- A more complex, hybrid example. Slot content defined here, other config and value sent from Node-RED -->
+                                <gauge ref="gauge2">
                                     <div style="position:absolute;text-align:center;top:60%;height:40%;left:25%;width:50%;color:silver;font-size:smaller;">
                                         Positioned<br />
                                         {{gauge2Val}}
@@ -39,10 +43,6 @@
                             </b-card>
 
                         </b-card-text>
-                    </b-tab>
-
-                    <b-tab title="Lights">
-                        <b-card-text>Not yet</b-card-text>
                     </b-tab>
 
                     <b-tab title="Debug Data">
@@ -94,8 +94,9 @@
     <script src="../uibuilder/vendor/vue/dist/vue.js"></script> <!-- dev version with component compiler -->
     <script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
     <script src="../uibuilder/vendor/http-vue-loader/src/httpVueLoader.js"></script>
-    <!-- <script src="../uibuilder/vendor/uibuilder-vuejs-component-extras/node_modules/vue-svg-gauge/dist/vue-svg-gauge.js"></script> -->
-    <script src="https://unpkg.com/vue-svg-gauge@latest/dist/vue-svg-gauge.min.js"></script>
+    <!-- <script src="https://unpkg.com/http-vue-loader@latest/src/httpVueLoader.js"></script> -->
+    <script src="../uibuilder/vendor/uibuilder-vuejs-component-extras/node_modules/vue-svg-gauge/dist/vue-svg-gauge.js"></script>
+    <!-- <script src="https://unpkg.com/vue-svg-gauge@latest/dist/vue-svg-gauge.min.js"></script> -->
     <script src="./uibuilderfe.js"></script>
     <script src="./index.js"></script>
 
