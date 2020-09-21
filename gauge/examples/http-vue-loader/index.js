@@ -33,43 +33,8 @@ var app1 = new Vue({
     }, // --- End of components --- //
 
     data: {
-        /** Use to pass any of vue-svg-gauge properties
-         * @param {gaugeOptions} gaugeConfig
-         * 
-         * @param {String} [gaugeConfig.title] If present, a para is added above the chart. Default: 'uibuilder Gauge',
-         * @param {String} [gaugeConfig.toolTip] If present, adds a title tooltip to the outer element. Default: undefined,
-         * @param {String} [gaugeConfig.figure] If present, a para is added below the chart. Default: undefined,
-         * @param {String} [gaugeConfig.clickEvents] If true, sends data back to uibuilder if clicked. Default: false,
-         * 
-         * @param {Number} [gaugeConfig.value] Gauge value. Optional, use main value prop normally. Default: 0
-         * @param {Number} [gaugeConfig.min] Default: 0,
-         * @param {Number} [gaugeConfig.max] Default: 100,
-         * @param {Number} [gaugeConfig.startAngle] Default: -90,
-         * @param {Number} [gaugeConfig.endAngle] Default: 90,
-         * @param {Number} [gaugeConfig.innerRadius] Default: 60,
-         * @param {Number} [gaugeConfig.separatorStep] Default: 10,
-         * @param {Number} [gaugeConfig.separatorThickness] Default: 4,
-         * @param {Array} [gaugeConfig.gaugeColor] Default: [{ offset: 0, color: '#347AB0' }, { offset: 100, color: '#8CDFAD' }],
-         * @param {String} [gaugeConfig.baseColor] Default: '#DDDDDD',
-         * @param {Number} [gaugeConfig.scaleInterval] Default: 5,
-         * @param {Number} [gaugeConfig.transitionDuration] Default: 1500,
-         * @param {String} [gaugeConfig.easing] Default: 'Circular.Out', @see https://github.com/tweenjs/tween.js/
-         */
-        gaugeConfig: {
-            title: 'My Gauge',
-            //toolTip: 'This is a vue-gauge',
-            clickEvents: true,
-            
-            // :start-angle="-110"
-            // :end-angle="110"
-            // :value="gValue"
-            // :separator-step="1"
-            // :min="0"
-            // :max="10"
-            // :gauge-color="[{ offset: 0, color: '#347AB0'}, { offset: 100, color: '#8CDFAD'}]"
-            // :scale-interval="0.1"
-        },
-        gValue: 0,
+        // Hold a copy of the value to use in index.html if you like
+        gauge2Val: null,
 
         //#region debug
         startMsg    : 'Vue has started, waiting for messages',
@@ -139,32 +104,40 @@ var app1 = new Vue({
 
     // Available hooks: init,mounted,updated,destroyed
     mounted: function(){
-        uibuilder.start()
         var vueApp = this
-        //console.log(vueApp)
-
         vueApp.feVersion = uibuilder.get('version')
 
+        uibuilder.start()
+
         uibuilder.onChange('msg', function(msg){
-            //console.info('[indexjs:uibuilder.onChange] msg received from Node-RED server:', msg)
+            // Debug
             vueApp.msgRecvd = msg
             vueApp.msgsReceived = uibuilder.get('msgsReceived')
 
+            /** If msg contains the _uib property ... */
             if ( msg._uib ) {
                 /** Here we cheat to update the components props directly.
                  *  This saves users from having to define props and data.
+                 * 
                  *  This code will be moved into uibuilderfe to make it completely hidden.
                  *  All you will need is to know the format of data to send.
                  */
-                if ( msg._uib.componentRef in vueApp.$refs ) {
-                    Object.keys(msg._uib.options).forEach( key => {
-                        //vueApp.gaugeConfig[key] = msg._uib.options[key]
-                        vueApp.$refs[msg._uib.componentRef].$props['config'][key] = msg._uib.options[key]
-                    })
-                    if ( typeof msg.payload === 'number' ) {
-                        console.log(`new gauge value received: ${msg.payload}`)
-                        //vueApp.gValue = msg.payload
-                        vueApp.$refs[msg._uib.componentRef].$props['config']['value'] = msg.payload
+                if (msg._uib.componentRef) { // Does the _uib object have a component reference?
+                    if ( msg._uib.componentRef in vueApp.$refs ) { // Does the ref exist?
+                        /** Copy each prop direct into the component (updates the DOM if needed) */
+                        Object.keys(msg._uib.options).forEach( key => {
+                            //vueApp.gaugeConfig[key] = msg._uib.options[key]
+                            vueApp.$refs[msg._uib.componentRef].$props['config'][key] = msg._uib.options[key]
+                        })
+                        /** Also check if the payload is a number. If it is update the gauges value with it */
+                        if ( typeof msg.payload === 'number' ) {
+                            console.log(`new gauge value received: ${msg.payload}`)
+                            //vueApp.gValue = msg.payload
+                            vueApp.$refs[msg._uib.componentRef].$props['config']['value'] = msg.payload
+                            
+                            // We can still use the value in our index.html as well of course...
+                            vueApp.gauge2Val = msg.payload
+                        }
                     }
                 }
             }
