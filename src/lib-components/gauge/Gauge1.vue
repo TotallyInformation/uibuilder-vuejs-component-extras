@@ -3,7 +3,7 @@
         <figcaption v-if="config.header" class="uibg-t">
             <span v-html="config.header" />
         </figcaption>
-        <vue-svg-gauge 
+        <vue-svg-gauge
             :style="config.style"
             :start-angle="config.startAngle"
             :end-angle="config.endAngle"
@@ -34,16 +34,21 @@
     }
 </style>
 
-<script scoped>
+<script>
 
 /** Use vue-svg-gauge component module
  * @see https://github.com/hellocomet/vue-svg-gauge
  * @see https://github.com/TotallyInformation/node-red-contrib-uibuilder/wiki/Integrating-vue-svg-gauge
  */
 
-module.exports = {
-    //export default {
-    name: 'gauge',
+import VueSvgGauge from 'vue-svg-gauge'
+
+export default {
+    name: 'Gauge',
+
+    components: {
+        VueSvgGauge
+    }, // --- End of components --- //
 
     /** Note that props with dashes in name have to be referenced as camel case in JS */
     props: {

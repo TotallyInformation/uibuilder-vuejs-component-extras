@@ -1,48 +1,38 @@
-<template>
-    <figure :title="config.toolTip" @click="clickOuter">
-        <figcaption v-if="config.header" class="uibg-t">
-            <span v-html="config.header" />
-        </figcaption>
-        <vue-svg-gauge 
-            :style="config.style"
-            :start-angle="config.startAngle"
-            :end-angle="config.endAngle"
-            :value="value || config.value || 0"
-            :separator-step="config.separatorStep"
-            :min="config.min"
-            :max="config.max"
-            :gauge-color="config.gaugeColor"
-            :scale-interval="config.scaleInterval"
-        >
-            <slot />
-        </vue-svg-gauge>
-        <figcaption v-if="config.caption" class="uibg-b">
-            <span v-html="config.caption" />
-        </figcaption>
-    </figure>
-</template>
+/** Pure JavaScript VueJS Component - may be loaded using Web Component standards */
 
-<style scoped>
-    figcaption {
-        text-align: center;
-    }
-    .uibg-t {
-        margin-bottom: 1rem;
-    }
-    .uibg-b {
-        margin-top: 1rem;
-    }
-</style>
+export default {
 
-<script scoped>
+    template: `
+        <figure :title="config.toolTip" @click="clickOuter">
+            <figcaption v-if="config.header" class="uibg-t">
+                <span v-html="config.header" />
+            </figcaption>
+            <vue-svg-gauge 
+                :style="config.style"
+                :start-angle="config.startAngle"
+                :end-angle="config.endAngle"
+                :value="value || config.value || 0"
+                :separator-step="config.separatorStep"
+                :min="config.min"
+                :max="config.max"
+                :gauge-color="config.gaugeColor"
+                :scale-interval="config.scaleInterval"
+            >
+                <slot />
+            </vue-svg-gauge>
+            <figcaption v-if="config.caption" class="uibg-b">
+                <span v-html="config.caption" />
+            </figcaption>
+        </figure>
+    `,
 
-/** Use vue-svg-gauge component module
- * @see https://github.com/hellocomet/vue-svg-gauge
- * @see https://github.com/TotallyInformation/node-red-contrib-uibuilder/wiki/Integrating-vue-svg-gauge
- */
+    // NOTE: Using modules prevents us from using scoped CSS - so we need to use the index.css to style things //
 
-module.exports = {
-    //export default {
+    /** Use vue-svg-gauge component module
+     * @see https://github.com/hellocomet/vue-svg-gauge
+     * @see https://github.com/TotallyInformation/node-red-contrib-uibuilder/wiki/Integrating-vue-svg-gauge
+     */
+
     name: 'gauge',
 
     /** Note that props with dashes in name have to be referenced as camel case in JS */
@@ -132,10 +122,8 @@ module.exports = {
 
 }
 
-</script>
-
-<!-- One of the following has to be loaded:
+/** One of the following has to be loaded:
      <script src="../uibuilder/vendor/uibuilder-vuejs-component-extras/node_modules/vue-svg-gauge/dist/vue-svg-gauge.min.js"></script>
      <script src="https://unpkg.com/vue-svg-gauge@latest/dist/vue-svg-gauge.min.js"></script> 
      Add one of them to your index.html file
-    -->
+  */
