@@ -93,11 +93,9 @@
     <script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
     <script src="../uibuilder/vendor/vue/dist/vue.js"></script> <!-- dev version with component compiler -->
     <script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
-    <script src="../uibuilder/vendor/http-vue-loader/src/httpVueLoader.js"></script>
-    <!-- <script src="https://unpkg.com/http-vue-loader@latest/src/httpVueLoader.js"></script> -->
     <script src="../uibuilder/vendor/uibuilder-vuejs-component-extras/node_modules/vue-svg-gauge/dist/vue-svg-gauge.min.js"></script>
     <!-- <script src="https://unpkg.com/vue-svg-gauge@latest/dist/vue-svg-gauge.min.js"></script> -->
     <script src="./uibuilderfe.js"></script>
-    <script src="./index.js"></script>
+    <script  type="module" src="./index.js"></script>
 
 </body></html>
