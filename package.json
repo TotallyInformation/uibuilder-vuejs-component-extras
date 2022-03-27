@@ -36,7 +36,7 @@
     "cross-env": "^7.0.2",
     "eslint": "^7.9.0",
     "eslint-plugin-vue": "^6.2.2",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "parcel": "^1.12.4",
     "rollup": "^2.7.3",
     "rollup-plugin-babel": "^4.4.0",
