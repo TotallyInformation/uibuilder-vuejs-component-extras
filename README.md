@@ -1,4 +1,11 @@
 # uibuilder-vuejs-component-extras
+
+As I no longer use VueJS to any extent, this repo is now archived. It is retained for reference and for anyone who wants to fork it for their own use.
+
+UIBUILDER has now moved on and no longer needs to rely on VueJS (though it can, of course, use it if you wish) and so I am no longer developing VueJS components. Any future components developed by me will be vanilla W3C Web Components. See [TotallyInformation/web-components](https://github.com/TotallyInformation/web-components) for examples.
+
+---
+
 A set of extra VueJS components designed to work with node-red-contrib-uibuilder though they should also work with other VueJS installations.
 
 **WARNING**: Currently pre-alpha and highly experimental. Don't assume that anything works right now. Also the installation instructions won't yet work.
